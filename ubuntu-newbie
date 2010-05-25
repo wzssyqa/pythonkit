@@ -1,0 +1,99 @@
+安装
+
+AMD64？
+
+root 的口令是多少？
+
+解压 rar
+
+自动启动 tomboy/gnote
+
+把一个常用的功能做成"桌面快捷方式"
+
+怎么开机的时候条目变多了(更新了内核)
+
+什么是 ppa？
+
+远程桌面/远程协助
+
+MP3 乱码
+
+Rhythmbox 发送歌曲到 MP3/U盘
+
+N卡驱动/A卡驱动/怎么下载不到 intel 卡驱动？/开3D
+
+/ 是个什么目录？
+
+Wubi 安装是个什么东西？
+
+自动登录
+
+JAVA 程序字体很不正常
+
+我这不能上网，怎么下载一堆软件，怎么解决依赖？ 新立德 文件 ->生成包下载脚本
+
+apt/新立德把软件给我装哪了  dpkg -L
+
+xxx说我的系统上缺少一个文件，我应该装哪个包？ apt-file
+
+我想看看我的硬件信息 lshw
+
+磁盘碎片整理
+
+怎么ghost？Ucloner
+
+以管理员打开/在终端中打开/设为壁纸    nautilus-gksu/nautilus-open-terminal/nautilus-wallpaper
+	nautilus-image-converter
+
+Gedit GB 乱码
+
+flash 乱码
+
+怎么上飞信？
+
+怎么使用 dvd 做源？我下载的cd为什么不能做源？(live版当然不能)/DVD 的下载地址？
+
+网银/QQ视频/WebQQ
+
+Ubuntu 挑硬件吗？不支持什么硬件
+
+重装了windows ，Ubuntu不见了（恢复grub2）
+
+定时关机
+
+宣传10秒启动，我的系统为什么要那么长时间
+
+安装额外字体
+
+怎么切换到中文输入法 ctrl-space
+
+gnome 终端可以拖文件进去
+
+如何升级到最新版/beta版如何升级到正式版
+
+校园网认证
+
+安装主题
+
+sudo apt-get clean (autoclean)
+
+Super 键是哪个？
+
+添加源时的 Key 问题/apt-add-repository
+
+杀毒软件/防火墙
+
+关于衍生发行版
+
+
+
+
+
+
+
+
+
+
+
+
+
