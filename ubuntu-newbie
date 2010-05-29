@@ -1,4 +1,3 @@
-安装
 
 AMD64 只能用在 AMD 的处理器上吗？我听说 64 位系统上可用的软件很少？
 	不是的，AMD64 也叫做 x86-64 ,x64，EM64T ，Intel64 等。这是普通 x86 处理器
@@ -68,10 +67,113 @@ root 的口令是多少？
 	来添加这个 ppa。(前边的那个 wzssyqa 就是~wzssyqa 去掉 ~，第二个 wzssyqa
 	就是地址最后的那个 wzssyqa)
 
+我这不能上网，怎么下载一堆软件，怎么解决依赖？ 
+	在新立德软件包管理器里
+	选中所有要安装的包，然后 
+		文件 -> 生成包下载脚本
+	使用这个生成的脚本去别的电脑上下载所有的包，并将所有的包都放在同一个目录中，
+	将这些包带回来之后，在所在的目录中运行
+		sudo dpkg -i *.deb
+
+apt/新立德把软件给我装哪了 
+	比如要知道 gedit 这个包装了哪些文件
+		dpkg -L gedit
+
+xxx说我的系统上缺少一个文件，我应该装哪个包？
+	有程序说缺少某个文件(比如缺少某个 C 头文件)，这时可以使用 apt-file 来搜索
+		sudo apt-get install apt-file
+		apt-file search stdio.h 或者
+		apt-file search /usr/include/stdio.h
+	如果想看看一个没有安装的包中都包含什么文件，可以
+		apt-file show 6tunnel
+
+我想看看我的硬件信息
+	lshw (list hardware)
+	够详细吧？
+
+磁盘碎片整理
+	因为 linux 的文件系统做的足够优秀，不需要专门进行碎片整理。
+
+怎么ghost？
+	可以使用 ptptptptptpt (6pt) 编写的 Ucloner 来实现这个功能。
+	去 http://code.google.com/p/ucloner/downloads/list 下载 Ucloner
+	确认安装了 squashfs-tools。解压开下载的压缩包，点击‘双击运行’
+
+	备份  是指，把系统备份到一个文件中
+	恢复  是指，把备份到文件中的系统恢复到硬盘上
+	克隆  是指，直接将一个系统复制到另外的分区
+
+以管理员打开/在终端中打开/设为壁纸    
+	Ubuntu 中默认使用的文件管理器是 nautilus，nautilus可以通过一些脚本扩展
+	功能，在 Ubuntu 官方源里，有几个很常用的功能
+	nautilus-gksu	安装了之后，会在右键上显示，‘以管理员身份打开’
+	nautilus-open-terminal	会在右键菜单上显示 ‘在终端中打开’
+	nautilus-wallpaper	可以快速的将图片设为壁纸
+	nautilus-image-converter	缩放图片
+
+	源里还有其它其它几个插件，另外可以从别的地方下载到很多其它有用的插件，当然您
+	也可以自己写一个。
+
+Gedit GB 乱码
+	这是因为 gedit 默认没有打开对 GB 系列编码的自动检测，可以通过一个命令打开这个功能
+		gconftool-2 --set --type=list --list-type=string /apps/gedit-2/preferences/encodings/auto_detected "[UTF-8,CURRENT,GB18030,BIG5-HKSCS,UTF-16]" 
+	当然也可以使用 gconf-edit 依次找到 /apps/geditor-2/preferences/encodings
+		在 auto_detected 一项中加上 GB18030
+
+flash 乱码(汉字显示为方块)/flash 中不能使用中文输入法
+	汉字显示为方块 
+		sudo rm /etc/fonts/conf.d/49-sansserif.conf
+	不能使用中文输入法
+		这个是 flash 的 bug 一直没有得到解决，据说 flash 10.1 中会得到解决
+
+怎么上飞信？
+	现在 Ubuntu 上可用的上飞信的方法主要有这几种：
+		1. linuxfetion，可以通过 ppa 添加
+		2. openfetion 也可以在 ppa 上找到(这个将来有可能会进官方源)
+		3. Pidgin 的飞信插件 http://www.linuxsir.org/bbs/thread320802.html
+
+怎么使用 dvd 做源？我下载的cd为什么不能做源？/DVD 的下载地址？
+	插入您的 DVD，然后运行 
+		sudo apt-cdrom add
+	如果您下载的 CD 中含有 desktop 字样，那中 CD 是 liveCD，是将整个系统打包的来的
+	类似于 ghost，所以是不能作为源的，如果要使用 CD 作为源，请下载含有 alternate
+	字样的 iso 文件。
+
+	可以在 http://cdimage.ubuntu.com/releases/lucid/release/ 下载到 DVD 版
+	(DVD 是不区分 desktop 和 alternate 的)
+
+网银/QQ视频
+	关于网银，可以打各个银行的服务热线询问，他们会给您办法的
+		工商银行:95588　建设银行:95533　招商银行:95555
+		农业银行:95599　中国银行:95566　中信银行:95558
+		交通银行:95559　光大银行:95595　华夏银行:95577
+		兴业银行:95561　民生银行:95568　邮政储蓄银行:95580
+		上海浦发银行:95528　深圳发展银行:95501
+	如果有条件的话，推荐使用 上海浦发银行
+
+	关于网银的具体情况可以看 
+		http://www.openbanks.info/
+
+	关于 QQ 视频，这个想都不要想了
+	推荐使用 Gtalk/Skyper 等来代替吧
+
+
+Super 键是哪个？
+	Super 键也叫做徽标键，在普通的 PC 机上就是画这微软徽标的那个键，一般在
+	ctrl 和 alt 之间，有人管它叫 win 键。在 Mac 机上是画苹果徽标的那个键。
+	
+Ubuntu 中文论坛上，每页都会给显示一条命令，很酷，从哪里可以找到它们？
+	http://wiki.ubuntu.org.cn/UbuntuSkills
+
+我的右上角原来有 网络管理器/信封/喇叭 图标，突然找不到了，怎么找回来？
+	在上边的面板上点击右键，选择 添加到面板
+	找到 通知区域 和 指示器小程序，双击。
+
+
+
 远程桌面/远程协助
 
 MP3 乱码
-	
 
 Rhythmbox 发送歌曲到 MP3/U盘
 
@@ -87,30 +189,7 @@ Wubi 安装是个什么东西？
 
 JAVA 程序字体很不正常
 
-我这不能上网，怎么下载一堆软件，怎么解决依赖？ 新立德 文件 ->生成包下载脚本
-
-apt/新立德把软件给我装哪了  dpkg -L
-
-xxx说我的系统上缺少一个文件，我应该装哪个包？ apt-file
-
-我想看看我的硬件信息 lshw
-
-磁盘碎片整理
-
-怎么ghost？Ucloner
-
-以管理员打开/在终端中打开/设为壁纸    nautilus-gksu/nautilus-open-terminal/nautilus-wallpaper
-	nautilus-image-converter
-
-Gedit GB 乱码
-
-flash 乱码
-
-怎么上飞信？
-
-怎么使用 dvd 做源？我下载的cd为什么不能做源？(live版当然不能)/DVD 的下载地址？
-
-网银/QQ视频/WebQQ
+安装
 
 Ubuntu 挑硬件吗？不支持什么硬件
 
@@ -119,7 +198,7 @@ Ubuntu 挑硬件吗？不支持什么硬件
 定时关机
 
 宣传10秒启动，我的系统为什么要那么长时间
-
+	
 安装额外字体
 
 怎么切换到中文输入法 ctrl-space
@@ -134,25 +213,10 @@ gnome 终端可以拖文件进去
 
 sudo apt-get clean (autoclean)
 
-Super 键是哪个？
-
 添加源时的 Key 问题/apt-add-repository
-
+	
 杀毒软件/防火墙
 
 关于衍生发行版
-
-Ubuntu 中文论坛上，每页都会给显示一条命令，很酷，从哪里可以找到它们？
-	http://wiki.ubuntu.org.cn/UbuntuSkills
-
-我的右上角原来有 网络管理器/信封/喇叭 图标，突然找不到了，怎么找回来？
-
-
-
-
-
-
-
-
 
 
