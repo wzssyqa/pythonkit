@@ -169,6 +169,77 @@ Ubuntu 中文论坛上，每页都会给显示一条命令，很酷，从哪里�
 	在上边的面板上点击右键，选择 添加到面板
 	找到 通知区域 和 指示器小程序，双击。
 
+怎么切换到中文输入法 
+	ctrl-space
+	不是 ctrl-shift 
+	多个输入法之间切换，比如从拼音切换到五笔是 alt-shift-L
+	
+gnome 终端可以拖文件进去
+	有时在 gnome 终端里输入一个很长的路径名很麻烦。其实，可以直接将这个文件拖
+	到终端窗口上，gnome 终端中将直接显示出这个文件的绝对路径，而且用单引号引起来了。
+如何升级到最新版/beta版如何升级到正式版
+	只要跟着升级管理器升级，就可以升级到正式版了
+	手动升级方法是 
+	sudo apt-get update
+	sudo apt-get upgrade
+
+安装额外字体
+	将字体复制到 /usr/share/fonts/truetype
+	然后运行 sudo fc-cache
+
+JAVA 程序字体很不正常
+	有些使用 swing 的 Java 程序，如 netbeans 等，字体渲染有问题，字体变形，
+	而且各个颜色发生偏离。
+	要解决这个问题，在桌面上点右键，选择最后一项‘更改桌面背景’，进入‘字体’标签，
+	在‘渲染’中，选择除了‘次像素平滑’之外的。
+
+定时关机
+	sudo shutdown 14:20 '系统将在 12：20 关闭'
+	sudo shutdown +20 '20 分钟后关机'
+	sudo shutdown now '立即关机'
+	sudo shutdown -c '取消关机'
+
+	具体的用法请 man shutdown
+
+自动登录
+	系统->系统设置->登录窗口
+
+
+系统突然告诉我，硬盘空间不够了，可是感觉应该足够。
+	是不是很长时间没有清理 deb 包缓存了？
+	Apt/aptitude/新立德 等，会把下载的 deb 包缓存在 /var/cache/apt/archives
+	如果长时间不清理，将会占用很大的空间，这时可以：
+		sudo apt-get clean #直接清空 /var/cache/apt/archives
+	    或者
+	    	sudo apt-get autoclean #删除旧版本的包
+	    		#比如现在同时有同一个包的新版本和旧版本，会只把旧版本删除
+	
+	
+重装了windows ，Ubuntu不见了(恢复grub2)
+	使用 LiveCD/LiveUSB 或者硬盘安装的方法，进入一个 live 环境，挂载上原来的
+	根分区，比如挂载为 /media/sda5
+	运行 
+		sudo chroot /meidia/sda5
+		grub-install /dev/sda
+	这样就可以把 grub2 安装在整块硬盘的 MBR 上。
+
+宣传10秒启动，我的系统为什么要那么长时间
+	这个地方说的 10 秒启动是在配置比较高的机器上，只安装了默认软件，配合固态硬盘
+	测试得到的数字，可以认为是一个极值，一般的机器是达不到这个数字的。
+	一般来说，启动时间一般在 20 多秒至 30秒。这也很快了，是吗？
+
+	
+N卡驱动/A卡驱动/怎么下载不到 intel 卡驱动？/开3D
+	要安装 Nvidia 显卡的驱动程序，只需要安装 nvidia-current 这个软件包就可以了。
+	
+	A
+
+	Intel 的显卡驱动程序是开放源代码的，所以可以直接集成到系统中去，Ubuntu 默认
+	已经安装了 Intel 显卡的驱动程序，完全不需要手动下载。只需要确定安装 
+	xserver-xorg-video-intel 这个包就可以了。
+
+
+
 
 
 远程桌面/远程协助
@@ -177,41 +248,17 @@ MP3 乱码
 
 Rhythmbox 发送歌曲到 MP3/U盘
 
-N卡驱动/A卡驱动/怎么下载不到 intel 卡驱动？/开3D
-	要安装 Nvidia 显卡的驱动程序，只需要安装 nvidia-current 这个软件包就可以了。
-	
-
 / 是个什么目录？
 
 Wubi 安装是个什么东西？
-
-自动登录
-
-JAVA 程序字体很不正常
 
 安装
 
 Ubuntu 挑硬件吗？不支持什么硬件
 
-重装了windows ，Ubuntu不见了（恢复grub2）
-
-定时关机
-
-宣传10秒启动，我的系统为什么要那么长时间
-	
-安装额外字体
-
-怎么切换到中文输入法 ctrl-space
-
-gnome 终端可以拖文件进去
-
-如何升级到最新版/beta版如何升级到正式版
-
 校园网认证
 
 安装主题
-
-sudo apt-get clean (autoclean)
 
 添加源时的 Key 问题/apt-add-repository
 	
