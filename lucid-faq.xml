@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN" "http://docbook.org/xml/4.3/docbookx.dtd">
+<chapter id="lesson1">
+  <title>Ubuntu FAQ</title>
+
+  <sect1>
+    <title>关于 64 位</title>
+    <sect2>
+    	<title>AMD64 只能用在 AMD 的处理器上吗？</title>
+    	<para>不是的！</para>
+    	<para>AMD64 也叫做 x86-64, x64，EM64T，Intel64 等。这是普通 x86 处理器
+	(就是传说中的 386,486...)的一种 64 扩展，由 AMD 首先提出，开始时 intel
+	对于这种技术并不热心，所以，最早支持这种架构的软件通常称之为 AMD64，Ubuntu 也
+	从 Debian 中延续这这种叫法。</para>
+	<para>基本上来说，06年之后生产的 Intel 和 AMD 处理器都支持这种架构。Atom 
+	系列是不支持这种架构的，另外威盛的处理器产品至今也不支持这种架构。</para>
+	<tip>
+		<title>IA64(安腾2) 并不是这种架构</title>
+		<para>IA64 是另外一种完全不同的处理器架构。Intel 当年就是为了
+		推广 IA64，才对 x86-64 不热心的，使 AMD 占据了先发优势。</para>
+	</tip>
+    </sect2>
+    
+    <sect2>
+    	<title>如何查看自己的计算机是否支持 AMD64？</title>
+    	<para>要查看自己的处理器是否支持 AMD64 可以去 
+    	<ulink url="http://www.amd.com/">AMD</ulink>
+    	或者 <ulink url="http://www.intel.com/">Intel</ulink> 的官方网站去查找。</para>
+    	<para>也可以使用一些专门查看硬件信息的软件查看。</para>
+    	<para>如果有安装好的 Linux 系统或者可以使用 LiveCD 或 LiveUSB 启动电脑，可以使用如下命令查看：</para>
+    	<screen format="linespecific">cat /proc/cpuinfo |grep lm</screen>
+    	<para>如果能够看到输出，表示您的输出支持 AMD64，如果没有输出则表现不支持。</para>
+    	
+    	<tip>
+		<title>如果很遗憾，您的 CPU 不支持 AMD64，但是您的内存却超过了 32 位系统支持的最大量...</title>
+		<para>这时可以安装 linux-image-server 或者 linux-image-generic-pae 这两个包中的一个。
+		或者也可以直接点击下边的这两个链接：</para>
+		<para><ulink url="apt://linux-image-generic-pae">linux-image-generic-pae</ulink></para>
+		<para><ulink url="apt://linux-image-server">linux-image-server</ulink></para>
+	</tip>	
+    </sect2>
+    
+    <sect2>
+    	<title>64 位的 Ubuntu 会不会可用软件很少？</title>
+    	<para>不会的。</para>
+    	<para>Linux 系统中，软件以开源软件为主，这些软件编写的时候就非常注意可移植性，
+    	一般都可以在多种不同的操作系统甚至硬件平台之间移植，当然也包括 AMD64。</para>
+    	<para>对于 Linux 上的商业软件，有些这种只提供 32 位；也有一些开源软件暂时不支持 AMD64，或者 64 位系统上缺少一些功能。
+    	这时可以安装 <ulink url="ia32-libs">ia32-libs</ulink> 来运行这些软件，但是这种软件的数量是很少的。
+    	支持 Linux 的商业软件，可移植性一般也相对比较好。</para>
+    	
+    	<para>Windows 64 上软件缺乏的几个原因：</para>
+    	    <itemizedlist>
+      		<listitem>
+        	<para>Windows 上的很多软件非常不注意可移植性；</para>
+      		</listitem>
+      		<listitem>
+        	<para>很多软件使用了可移植性比较差的程序库，造成了不可移植；</para>
+      		</listitem>
+      		</listitem>
+      		<listitem>
+        	<para>出于商业上的考虑不想支持 Windows 64 平台；</para>
+      		</listitem>
+      		<listitem>
+        	<para>Windows 64 平台的用户很少，软件开发者没有动力。</para>
+      		</listitem>
+    	    </itemizedlist>
+    </sect2>
+    
+  </sect1>
+  
+  <sect1>
+    <title>Root 用户的口令是什么？安装时并没有要求我输入 root 的口令。</title>
+    <para>在很多其它 Linux 发行版上，root 用户是默认启用的，而 Ubuntu 不是这样的。在 Ubuntu 中 root 用户默认是被禁用的。</para>
+    <para>要进行特权操作，只需要在运行的命令前边加上 sudo 。</para>
+    <para>如果想要临时成为 root 用户进行一些操作，请使用 sudo su 。</para>
+    <para>如果必须要启用 root，可以运行 sudo passwd root ，来修改 root 的口令，即可启用 root。</para>
+    <tip>
+		<title>Ubuntu 是怎么实现禁用 root 的？</title>
+		<para>Ubuntu 通过给 root 用户设置一个特殊的口令，以使无论输入什么口令都验证错误，来达到禁用 root 的目的。</para>
+    </tip>	
+  </sect1>
+  
+  <sect1>
+    <title>Ubuntu 中怎么解压 rar 文件？</title>
+    <para>安装 <ulink url="apt://unrar">unrar</ulink>。</para>
+    <para>此外还可以使用开源的 <ulink url="apt://unrar-free">unrar-free</ulink>，这个包对新版本的 rar 文件支持并不是特别好。</para>
+    <tip>
+		<title>如何将文件压缩成 rar？</title>
+		<para>为什么一定要使用 rar 格式呢？</para>
+		<para>Ubuntu 默认支持 zip，gz，lz 等几种压缩格式，而且这几种格式都可以使用 Windows 
+		上常见的 WinRAR，WinZip 等软件解压。但是这几种格式不支持分卷压缩。</para>
+		<para>如果需要分卷压缩，可以安装 <ulink url="apt://p7zip">p7zip</ulink> 来添加对 7z 这种格式的支持。
+		当然，这种格式也可以使用 WinRAR，WinZip 等软件解压。</para>
+    </tip>
+  </sect1>
+  
+  <sect1>
+    <title>如何开机时自动启动 tomboy/gnote？</title>
+    <para>在顶部面板(就是顶部的那个黑框)的空白部分上点击鼠标右键，在弹出菜单中选择“添加到面板”，
+    找到 tomboy 或者 gnote 双击即可。</para>
+    <tip>
+		<title>关于 tomboy 和 gnote</title>
+		<para>Tomboy 是 Gnome 的一款便笺程序，使用 GTK# 编写，依赖 Mono。</para>
+		<para>Gnote 也是 Gnome 上的一款便笺程序，使用 GTKmm 编写。</para>
+		<para>这两款程序在界面，使用方法，功能上几乎完全一致。</para>
+		<para>Gnote 的产生是因为有人不喜欢 Mono(.NET 的开源实现)，
+		所以使用 GTKmm 写了一个和 tomboy 完全一样的软件。 </para>
+    </tip>
+  </sect1>
+  
+  <sect1>
+    <title>如何把一个功能做成桌面快捷方式？</title>
+    <para>在桌面上点右键，选择“创建启动器”。输入一条命令，选择一张图片，点击“确定”。例如
+    	<screen format="linespecific">gnome-screenshot -a</screen>
+    命令可以让您选择桌面的一个区域进行截图。</para>
+    <tip>
+		<title>Linux 上使用一定格式的以 desktop 为后缀的文本文件作为启动器。</title>
+		<para>所有的菜单，面板图标等都是使用这种方法实现的。</para>
+		<para>如果想把一个主菜单中的一项发送到桌面上，可以在这一项上直接点鼠标右键。</para>
+    </tip>
+  </sect1>
+  
+  <sect1>
+    <title>怎么开机的时候条目变多了？</title>
+    <para>这是因为您安装了新的系统内核。每个版本的内核都会在启动是有两项。Ubuntu 为了防止新版内核有问题，
+    没有自动删除旧内核。如果确定新内核可以正常工作，就可以删除旧内核。</para>
+    <para>有多种方法可以删除多于的内核：</para>
+        <itemizedlist>
+      		<listitem>
+        	<para>使用新立德查找 linux-image，删除当前版本之外的所有内核。</para>
+      		</listitem>
+      		<listitem>
+        	<para><screen format="linespecific">sudo apt-get purge ~ilinux-image-.*\(\!`uname -r`\)</screen></para>
+      		</listitem>
+    	</itemizedlist>
+  </sect1>
+  
+  <sect1>
+    <title>什么是 PPA？</title>
+    <para>PPA，表示 Personal Package Archives，也就是个人软件包集。</para>
+    <para>有很多软件因为种种原因，不能进入官方的 Ubuntu 软件仓库。
+    为了方便 Ubuntu 用户使用，launchpad.net 提供了 ppa，允许用户建立自己的软件仓库，
+    自由的上传软件。PPA 也被用来对一些打算进入 Ubuntu 官方仓库的软件，或者某些软件的新版本进行测试。</para>
+    <para>PPA 上的软件极其丰富，如果 Ubuntu 官方仓库中缺少您需要的某款软件，可以去 PPA 上找找看。</para>
+    
+    <para>例如，现在您需要一款叫做 ns2 的软件。您可以去 <ulink url="http://launchpad.net">launchpad</ulink>上以
+    <screen format="linespecific">ns2 ppa</screen>
+    为关键字进行搜索，可以看到有两个人在 launchpad 上提供这个软件包。从两个中选择一个，比如
+    https://launchpad.net/~wzssyqa/+archive/wzssyqa
+    在这个页面中，可以看看，这个 ppa 的主人有没有提供你所使用的版本 Ubuntu 所对应的 ns2，
+    比如，正好您用的也是 lucid，那么就可以直接使用命令
+    <screen format="linespecific">sudo apt-add-repository ppa:wzssyqa/wzssyqa</screen>
+    将这个 PPA 添加到您的系统中。
+    </para>
+    <tip>
+		<title>ppa:wzssyqa/wzssyqa 是怎么来的</title>
+		<para>前边的那个 wzssyqa 就是~wzssyqa 去掉 ~，这是此 PPA 的主人在 launchpad 上的帐户名。</para>
+		<para>第二个 wzssyqa 是这个 PPA 的名字。每个人可以建立多个 PPA 的。</para>
+		
+		<title>launchpad.net</title>
+		<para>launchpad.net 有很多功能，Ubuntu 的很多开发工作是通过这个平台进行的。
+		大家都亲切地将之称为 LP。</para>
+    </tip>
+  </sect1>
+  
+  <sect1>
+    <title>我这不能上网，怎么下载多个软件，怎么解决依赖？ </title>
+    <para>打开“新立德软件包管理器”，选择要安装的软件，并“标记以便安装”。
+    	然后选择 <screen format="linespecific">文件 -> 生成包下载脚本</screen>
+    	使用这个脚本可以下载所有要安装的软件，以及它们的依赖。
+    	例如，您生成了 <screen format="linespecific">download.sh</screen> 脚本，
+    	就可以使用 使用 <screen format="linespecific">./download.sh</screen>
+    	命令将所有软件包下载到当前目录。
+    </para>
+    <para>将下载的所有软件包放在同一个目录中，使用：
+    	<screen format="linespecific">sudo dpkg -i *.deb</screen>
+    	命令，就可以将所有软件包都安装上。
+    </para>
+    <tip>
+		<title>我要去 Windows 上去下载，怎么办？</title>
+		<para>这个文件的大体格式是：
+		以 <screen format="linespecific">#！/bin/sh</screen> 开头，
+		接着是类似于：
+		<screen format="linespecific">wget http://mirrors.163.com/ubuntu/pool/main/a/acl/acl_2.2.49-3_amd64.deb</screen>
+		的很多行。
+		仅仅需要删掉所有 “wget” 以及开头的 “#！/bin/sh” 就可以把后缀改成 lst，作为下载列表，导入 Windows 下常用的几种下载软件了。
+		</para>
+    </tip>
+  </sect1>
+  
+  <sect1>
+    <title>apt/新立德把软件给我装哪了？</title>
+    <para>比如要知道 gedit 这个包装了哪些文件：
+ 	   <screen format="linespecific">dpkg -L gedit</screen>
+    </para>
+    <para>在新立德中，选中一个安装了的包，点右键，查看属性，也可以看到安装了的文件。
+    </para>
+  </sect1>
+  
+  <sect1>
+    <title>我进行一些工作的时候，比如编译 C 程序的时候，提示缺少一些文件，怎么办？</title>
+    <para>这很有可能是因为您没有安装一些必需的软件包，可以根据文件名，使用 apt-file 找到这个文件在哪个软件包里。
+    	<screen format="linespecific">sudo apt-get install apt-file  #安装 apt-file</screen>
+    	<screen format="linespecific">sudo apt-file update #更新 apt-file 本地数据库</screen>
+    	<screen format="linespecific">sudo apt-file search stdio.h # 或者</screen>
+    	<screen format="linespecific">sudo apt-file search /usr/include/stdio.h</screen>
+    </para>
+    <para>要查看一个没有安装的软件包包含什么文件，可以使用 show 命令：
+    	<screen format="linespecific">sudo apt-file show 6tunnel</screen>
+    </para>
+  </sect1>
+  
+  <sect1>
+    <title>怎么查看硬件信息？</title>
+    <para><screen format="linespecific">lshw</screen></para>
+    <para>应该足够详细吧？</para>   
+  </sect1>
+  
+  <sect1>
+    <title>Linux 怎么进行碎片整理？</title>
+    <para>Linux 的文件系统做的足够优秀，不需要专门进行碎片整理。</para>
+    <para>相信我！</para>
+  </sect1>
+  
+  <sect1>
+    <title>我想备份我现在的系统，怎么办？Ghost 好像不行。</title>
+    <para>可以使用 ptptptptptpt (6pt) 编写的 
+    <ulink url="http://code.google.com/p/ucloner/downloads/list">Ucloner</ulink> 来实现这个功能。
+    在确认安装了 <ulink url="apt://squashfs-tools">squashfs-tools</ulink> 之后，解压开下载的压缩包，点击‘双击运行’。
+    </para>
+    <para>
+    	<itemizedlist>
+      		<listitem>
+        	<para>备份    是指，把系统备份到一个文件中</para>
+      		</listitem>
+      		<listitem>
+        	<para>恢复  是指，把备份到文件中的系统恢复到硬盘上</para>
+      		</listitem>
+      		<listitem>
+        	<para>克隆  是指，直接将一个系统复制到另外的分区</para>
+      		</listitem>
+    	</itemizedlist>
+    </para>
+  </sect1>
+  
+  <sect1>
+    <title>我想备份我现在的系统，怎么办？Ghost 好像不行。</title>
+    <para>可以使用 ptptptptptpt (6pt) 编写的 
+    <ulink url="http://code.google.com/p/ucloner/downloads/list">Ucloner</ulink> 来实现这个功能。
+    在确认安装了 <ulink url="apt://squashfs-tools">squashfs-tools</ulink> 之后，解压开下载的压缩包，点击‘双击运行’。
+    </para>
+    <para>
+    	<itemizedlist>
+      		<listitem>
+        	<para>备份    是指，把系统备份到一个文件中</para>
+      		</listitem>
+      		<listitem>
+        	<para>恢复  是指，把备份到文件中的系统恢复到硬盘上</para>
+      		</listitem>
+      		<listitem>
+        	<para>克隆  是指，直接将一个系统复制到另外的分区</para>
+      		</listitem>
+    	</itemizedlist>
+    </para>
+  </sect1>
+  
+  <sect1>
+    <title>怎么设置鼠标右键菜单？ 以管理员打开/在终端中打开/设为壁纸 等功能是怎么实现的？</title>
+    <para>Ubuntu 中默认使用的文件管理器是 nautilus，nautilus可以通过一些脚本扩展功能，在 Ubuntu 官方源里，有几个很常用的插件：
+    </para>
+    <para>
+    	<itemizedlist>
+      		<listitem>
+        	<para><ulink url="apt://nautilus-gksu">nautilus-gksu</ulink>    右键上添加，‘以管理员身份打开’</para>
+      		</listitem>
+      		<listitem>
+        	<para><ulink url="apt://nautilus-open-terminal">nautilus-open-terminal</ulink>    右键上添加，‘在终端中打开’</para>
+      		</listitem>
+      		<listitem>
+        	<para><ulink url="apt://nautilus-wallpaper">nautilus-wallpaper</ulink>    右键上添加，‘设为壁纸’</para>
+      		</listitem>
+    	</itemizedlist>
+    </para>
+    <para>源里还有其它几个 nautilus 插件，可以在新立德里搜索 nautilus。</para>
+    <para>还有很多有用的 nautilus 插件没有进入 Ubuntu 官方源，您可以在网络上找到。当然您也可以自己编写一个。</para>
+  </sect1>
+  
+  <sect1>
+    <title>Gedit 打开一些文本文件时会乱码，其它文本编辑器却正常，这是怎么回事？</title>
+    <para>这是因为 gedit 默认没有打开对 GB 系列编码的自动检测，可以通过一个命令打开这个功能：
+    	<screen format="linespecific">gconftool-2 --set --type=list --list-type=string \
+    		/apps/gedit-2/preferences/encodings/auto_detected "[UTF-8,CURRENT,GB18030,BIG5-HKSCS,UTF-16]" </screen>
+    </para>
+    <para>也可以在 应用程序 -> 系统工具 中找到 配置编辑器</para>
+    <para>使用配置编辑器定位到 
+    <screen format="linespecific">/apps/geditor-2/preferences/encodings</screen>
+    在其中添加
+    <screen format="linespecific">GB18030</screen>
+    </para>
+  </sect1>
+  
+  <sect1>
+    <title>flash 中汉字怎么显示为方块，也不能使用 iBus 输入法？</title>
+    <para>对于汉字显示为方块的问题：
+    	<screen format="linespecific">sudo rm /etc/fonts/conf.d/49-sansserif.conf</screen>
+    </para>
+    <para>关于不能使用中文输入法的问题：</para>
+    <para>这个是 flash 的一个 bug，一直未得到解决，不过据说 10.1 中将得到解决，现在 10.1 已经发布了。
+    	如果有兴趣，可以进行测试。
+    </para>
+  </sect1>
+  
+  <sect1>
+    <title>在 Linux 上怎么使用飞信？</title>
+    <para>现在 Linux 上使用飞信的方法有如下几种：
+    </para>
+    <itemizedlist>
+      		<listitem>
+        	<para>linuxfetion，  基于 QT 的飞信客户端，可以通过 ppa 添加</para>
+      		</listitem>
+      		<listitem>
+        	<para>openfetion     基于 GTK+ 的飞信客户端， 也可以在 ppa 上找到(这个将来有可能会进官方源)</para>
+      		</listitem>
+      		<listitem>
+        	<para><ulink url="http://www.linuxsir.org/bbs/thread320802.html">Pidgin 的飞信插件</ulink></para>
+      		</listitem>
+      		<listitem>
+        	<para><ulink url="http://mail.139.com/">中国移动 139 邮箱</ulink> 中可以登录网页版飞信</para>
+      		</listitem>
+    	</itemizedlist>
+    </para>
+  </sect1>
+  
+  <sect1>
+    <title>怎么使用 DVD 做源？我下载的 CD 为什么不能做源？DVD 的下载地址？</title>
+    <sect2>
+    	<title>怎么使用 dvd 做源？</title>
+    	<para>一般来说，只有把 Ubuntu DVD 光盘插入光驱中，会自动询问是否使用 DVD 更新系统的。</para>
+    	<para>如果没有弹出，可以使用如下命令：
+    		<screen format="linespecific">sudo apt-cdrom add</screen>
+    	</para>
+    </sect2>
+    <sect2>
+    	<title>我下载的 CD 为什么不能做源？</title>
+    	<para>Ubuntu 镜像分为两种，desktop 和 alternate。</para>
+    	<para>Desktop 版就是 LiveCD，可以认为是安装好之后，又打包的，所以是不能作为源的。</para>
+    	<para>Alternate 可以认为就是放在光盘上的 Ubuntu 软件仓库，所以是可以作为软件源使用的。</para>
+    </sect2>
+    
+    <sect2>
+    	<title>Ubuntu DVD 可以在什么地方下载到？</title>
+    	<para>http://cdimage.ubuntu.com/releases/lucid/release/</para>
+    	<para>DVD 是不分 Desktop 和 Alternate 的哦。</para>
+    </sect2>
+  </sect1>
+  
+  <sect1>
+    <title>Ubuntu 上怎么使用网上银行？</title>
+    	<para>可以打各个银行的服务热线询问，他们会给您办法的：
+    	   <screen format="linespecific">
+    	   	工商银行:95588　建设银行:95533　招商银行:95555
+		农业银行:95599　中国银行:95566　中信银行:95558
+		交通银行:95559　光大银行:95595　华夏银行:95577
+		兴业银行:95561　民生银行:95568　邮政储蓄银行:95580
+		上海浦发银行:95528　深圳发展银行:95501</screen>
+    	</para>
+    	<para>
+    	   <screen format="linespecific">
+    	   	如果有条件，推荐使用 上海浦发银行</screen>
+    	</para>
+    	<para>关于网银的具体情况可以看：
+    		<screen format="linespecific">
+    	   		http://www.openbanks.info/
+    	   	</screen>
+    	</para>
+  </sect1>
+  
+  <sect1>
+    <title>Ubuntu 上怎么语音视频聊天？</title>
+    	<para>由于腾讯公司不支持，在 Linux 上 QQ 最多只能单方视频
+    	   可以使用 Gtalk/Skyper 来代替。
+    	</para>
+  </sect1>
+  
+  <sect1>
+    <title>Super 键是键盘上的哪个键？</title>
+    	<para>Super 键也叫做徽标键，在普通的 PC 机上就是画这微软徽标的那个键，一般在
+	ctrl 和 alt 之间，有人管它叫 win 键。在 Mac 机上是画苹果徽标的那个键。
+    	</para>
+  </sect1>
+  
+  <sect1>
+    <title>Ubuntu 中文论坛上，每页都会给显示一条命令，很酷，从哪里可以找到它们？</title>
+    	<para>http://wiki.ubuntu.org.cn/UbuntuSkills</para>
+  </sect1>
+  
+  <sect1>
+    <title>我的右上角原来有 网络管理器/信封/喇叭 图标，突然找不到了，怎么找回来？</title>
+    	<para>在上边的面板上点击右键，选择 添加到面板</para>
+    	<para>找到 通知区域 和 指示器小程序，分别双击。</para>
+  </sect1>
+  
+  <sect1>
+    <title>iBus 怎么切换到中文输入法？</title>
+    	<para>Ctrl-Space， 不是 ctrl-shift </para>
+    	<para>多个输入法之间切换，比如从拼音切换到五笔是 Alt-Shift-L，当然这都是可以设置的。</para>
+  </sect1>
+  
+  <sect1>
+    <title>在 Gnome 终端中，如果需要输入一个很长的文件名怎么办？</title>
+    <para>
+    	<itemizedlist>
+      		<listitem>
+        	<para>Ctrl-Shift-C 复制；Ctrl-Shift-V 粘贴。这是因为 Ctrl-C 和 Ctrl-V 在终端中有其它用处。</para>
+      		</listitem>
+      		<listitem>
+        	<para>文件名输入了一部之后，按 Tab 试试，当然 Tab 也可以补全命令。或者可以试试 zsh，补全功能更加强大。</para>
+      		</listitem>
+      		<listitem>
+        	<para>直接将一个文件拖动到终端框中，看看有什么效果？Gnome 终端中将直接显示出这个文件的绝对路径，而且用单引号引起来。</para>
+      		</listitem>
+    	</itemizedlist>
+    </para>
+  </sect1>
+  
+  <sect1>
+    <title>我安装的是 Beta/RC 版，我可以升级到正式版吗？</title>
+    <para>
+    	这当然是没有任何问题的。需要做的只是，跟着升级管理器升级就行了。实际上，甚至可以从一个版本升级到另一个版本。
+    </para>
+  </sect1>
+  
+  <sect1>
+    <title>怎么安装新字体？</title>
+    <para>
+    	将字体复制到 
+    	<screen format="linespecific">/usr/share/fonts/truetype</screen>
+    	然后运行命令：
+    	<screen format="linespecific">sudo fc-cache</screen>
+    </para>
+  </sect1>
+  
+  <sect1>
+    <title>有些 JAVA 程序字体很不正常，字好像颜色分离的，而且变得很瘦，这是怎么回事？</title>
+    <para>OpenJDK 的 Swings 的字体渲染有些问题，这会造成 NetBeans 等使用 Swings 的程序字体显示异常。
+    </para>
+    <para>要解决这个问题，在桌面上点右键，选择最后一项‘更改桌面背景’，进入‘字体’标签，在‘渲染’中，
+    	选择除了‘次像素平滑’之外的另外三个选项都没有这个问题。</para>
+  </sect1>
+  
+  <sect1>
+    <title>怎么实现定时关机？</title>
+    <para>可以使用 shutdown 命令实现定时关机。</para>
+    <para>
+    	<screen format="linespecific">
+    	sudo shutdown 14:20 '系统将在 12：20 关闭'
+	sudo shutdown +20 '20 分钟后关机'
+	sudo shutdown now '立即关机'
+	sudo shutdown -c '取消关机'
+    	</screen>
+    	具体的用法请 
+    	<screen format="linespecific">man shutdown</screen>
+    </para>
+  </sect1>
+  
+  <sect1>
+    <title>如何设置，可以自动登录？</title>
+    <para>
+    	<screen format="linespecific">
+    	系统 -> 系统设置 -> 登录窗口
+    	</screen>
+    	或者直接运行
+    	<screen format="linespecific">
+    	sudo gdmsetup
+    	</screen>
+    </para>
+  </sect1>
+  
+  <sect1>
+    <title>根目录没有空间了，可是，我装的软件并不多，这是怎么回事？</title>
+    <para>是不是很长时间没有清理 deb 包缓存了？</para>
+    <para>Apt/aptitude/新立德 等，会把下载的 deb 包缓存在 
+    	<screen format="linespecific">/var/cache/apt/archives</screen>
+    	如果长期不清理，可能占用大量的空间。
+    </para>可以使用如下两个命令清理 deb 包缓存：
+    	<screen format="linespecific">
+    	sudo apt-get clean #直接清空 /var/cache/apt/archives
+    	</screen>
+    	或者
+    	<screen format="linespecific">
+    	sudo apt-get autoclean #删除旧版本的包
+	    		#比如现在同时有同一个包的新版本和旧版本，会只把旧版本删除
+    	</screen>
+    </para>
+  </sect1>
+  
+  <sect1>
+    <title>我重新安装了 Windows，可是启动时缺找不到 Ubuntu 的启动项了？</title>
+    <para>
+	可以使用如下两种方法之一，修复 Ubuntu 的启动：
+    </para>
+    <para>
+	使用 LiveCD/LiveUSB 或者硬盘安装的方法，进入一个 live 环境，挂载上原来的
+	根分区，比如挂载为 /media/sda5，然后运行命令：
+	<screen format="linespecific">
+    		sudo chroot /meidia/sda5
+    		grub-install /dev/sda
+    		update-grub
+    	</screen>
+    </para>
+    <para>
+	下载 GRUB4DOS，将其中的 grldr 或者 g2ldr 放在 Windows 的 C 盘根目录中，然后修改 
+	<screen format="linespecific">
+    		C：\boot.ini
+    	</screen>
+    	添加一行
+    	<screen format="linespecific">
+    		C：\grldr = GRUB4DOS   或者
+    		C：\g2ldr = GRUB4DOS
+    	</screen>
+    	并删除 C 盘中的 menu.lst (或者 grub.cfg boot/menu.lst boot/grub.cfg 等) 文件。
+    	重启系统，选择 GRUB4DOS 项，选择自动探测 grub.cfg 那一项，就可以带您进入 Ubuntu 系统了。
+    	然后运行命令：
+	<screen format="linespecific">
+    		grub-install /dev/sda
+    		sudo update-grup
+    	</screen>
+    </para>
+  </sect1>
+  
+  <sect1>
+    <title>有的宣传说 Ubuntu 可以 10 秒启动系统，为什么我的却那么慢？</title>
+    <para>
+    	这个地方说的 10 秒启动是在配置比较高的机器上，只安装了默认软件，配合固态硬盘
+	测试得到的数字，可以认为是一个极值，一般的机器是达不到这个数字的。
+	一般来说，启动时间一般在 20 多秒至 30秒。这也很快了，是吗？
+    </para>
+  </sect1>
+  
+</chapter>
