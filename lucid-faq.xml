@@ -57,7 +57,6 @@
       		<listitem>
         	<para>很多软件使用了可移植性比较差的程序库，造成了不可移植；</para>
       		</listitem>
-      		</listitem>
       		<listitem>
         	<para>出于商业上的考虑不想支持 Windows 64 平台；</para>
       		</listitem>
@@ -314,7 +313,6 @@
   <sect1>
     <title>在 Linux 上怎么使用飞信？</title>
     <para>现在 Linux 上使用飞信的方法有如下几种：
-    </para>
     <itemizedlist>
       		<listitem>
         	<para>linuxfetion，  基于 QT 的飞信客户端，可以通过 ppa 添加</para>
