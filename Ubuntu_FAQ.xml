@@ -657,7 +657,7 @@ sudo shutdown -c '取消关机'</screen>
     <sect2>
     	<title>关于 Debian (此部分内容来自 WikiPedia)</title>
     	<para>Debian 于 1993年8月16日 由一名美国普渡大学学生 Ian Murdock 首次发表。</para>
-    	<para>Debian（IPA: /ˈdɛ.bi.ən/）是由GPL和其他自由软件许可协议授权的自由软件组成的操作系统，
+    	<para>Debian 是由GPL和其他自由软件许可协议授权的自由软件组成的操作系统，
     	由Debian计划(Debian Project)组织维护。Debian计划没有任何的营利组织支持，它的开发团队完全由来自世界各地的志愿者组成，
     	官方开发者的总数就将近1000名，非官方的开发者为数更多。</para>
     	<para>Debian 计划组织跟其他自由操作系统(如 Ubuntu、openSUSE、Fedora、Mandriva、OpenSolaris等)的开发组织不同。
