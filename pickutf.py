@@ -1,4 +1,12 @@
 #!/usr/bin/env python
+# Copyright 2010 YunQiang Su <wzssyqa@gmail.com>
+# Scan a file look for \$\#x1111;  and convert them to a char of utf8
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of version 2 of the GNU General Public License as
+# published by the Free Software Foundation.
+#
+
 import sys
 
 if sys.argv[1]:

@@ -1,0 +1,83 @@
+#!/usr/bin/env python
+# Copy ID3 tag to APEv2
+# Copyright 2010 YunQiang Su <wzssyqa@gmail.com>
+# There is some code from mid3iconv by Emfox Zhou <EmfoxZhou@gmail.com>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of version 2 of the GNU General Public License as
+# published by the Free Software Foundation.
+#
+
+import os
+import sys
+import locale
+
+from optparse import OptionParser
+
+VERSION = (0, 1)
+
+ 
+
+def update(options, filenames):
+    encoding = options.encoding or locale.getpreferredencoding()
+    verbose = options.verbose
+    noupdate = options.noupdate
+    
+    def conv(uni):
+        try: tag=uni.encode('iso-8859-1').decode(encoding)
+        except UnicodeEncodeError:
+        	return uni
+        except UnicodeDecodeError:
+        	return uni
+        return tag
+
+    for filename in filenames:
+        if verbose != "quiet":
+            print "Updating", filename
+	
+        f = tagpy.mpeg.File(filename)   
+        id2tag=f.ID3v2Tag()
+        ape2tag=f.APETag()
+	if ape2tag:
+		continue
+	
+	try:ApeTag.createape(filename,{"title":conv(id2tag.title),'artist':conv(id2tag.artist) \
+			,'album':conv(id2tag.album),'comment':conv(id2tag.comment)})
+	except IOError:
+		print filename + ' IOError'
+		continue
+
+
+def main(argv):
+    parser = OptionParser()
+    parser.add_option(
+        "-e", "--encoding", metavar="ENCODING", action="store",
+        type="string", dest="encoding",
+        help=("Specify original tag encoding (default is %s)" %(
+        locale.getpreferredencoding())))
+    parser.add_option(
+        "-p", "--dry-run", action="store_true", dest="noupdate",
+        help="Do not actually modify files")
+    parser.add_option(
+        "-q", "--quiet", action="store_const", dest="verbose",
+        const="quiet", help="Only output errors")
+    parser.add_option(
+        "-d", "--debug", action="store_const", dest="verbose",
+        const="debug", help="Output updated tags")
+
+    for i, arg in enumerate(sys.argv):
+        if arg == "-v1": sys.argv[i] = "--force-v1"
+        elif arg == "-removev1": sys.argv[i] = "--remove-v1"
+
+    (options, args) = parser.parse_args(argv[1:])
+
+    if args:
+        update(options, args)
+    else:
+        parser.print_help()
+
+if __name__ == "__main__":
+    import tagpy
+    import tagpy.mpeg
+    import ApeTag
+    main(sys.argv)
